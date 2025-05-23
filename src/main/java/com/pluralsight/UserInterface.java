@@ -12,7 +12,7 @@ public class UserInterface {
     }
 
     public void start() {
-        System.out.println("Welcome to DELI-cious!");
+        System.out.println("Welcome to the Deli-Shop!");
         System.out.println("======================");
 
         boolean running = true;
@@ -20,7 +20,7 @@ public class UserInterface {
             running = displayHomeScreen();
         }
 
-        System.out.println("Thank you for visiting DELI-cious!");
+        System.out.println("Thank you for visiting  Deli-Shop!");
         scanner.close();
     }
 
