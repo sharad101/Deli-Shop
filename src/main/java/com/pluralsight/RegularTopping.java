@@ -10,5 +10,5 @@ public class RegularTopping extends Topping {
     public double getPrice() {
         return 0;
     }
-    
+
 }
