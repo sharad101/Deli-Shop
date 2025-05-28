@@ -80,19 +80,68 @@ public class Sandwich implements OrderItem {
     public String getDescription() {
         StringBuilder desc = new StringBuilder();
         desc.append(size).append("\" ").append(breadType).append(" sandwich");
+
         if (toasted) {
             desc.append(" (toasted)");
         }
+
+        // Add detailed toppings breakdown
         if (!toppings.isEmpty()) {
-            desc.append(" with ").append(toppings.size()).append(" toppings");
+            desc.append(" with:");
+
+            // Separate meats, cheeses, and other toppings
+            List<String> meats = new ArrayList<>();
+            List<String> cheeses = new ArrayList<>();
+            List<String> regularToppings = new ArrayList<>();
+
+            for (Topping topping : toppings) {
+                if (topping instanceof PremiumToppings) {
+                    PremiumToppings premium = (PremiumToppings) topping;
+                    if ("meat".equals(premium.getCategory())) {
+                        meats.add(topping.getName());
+                    } else if ("cheese".equals(premium.getCategory())) {
+                        cheeses.add(topping.getName());
+                    }
+                } else {
+                    regularToppings.add(topping.getName());
+                }
+            }
+
+            if (!meats.isEmpty()) {
+                desc.append(" Meats(").append(String.join(", ", meats)).append(")");
+                if (extraMeat) desc.append(" +EXTRA");
+            }
+
+            if (!cheeses.isEmpty()) {
+                desc.append(" Cheese(").append(String.join(", ", cheeses)).append(")");
+                if (extraCheese) desc.append(" +EXTRA");
+            }
+
+            if (!regularToppings.isEmpty()) {
+                desc.append(" Toppings(").append(String.join(", ", regularToppings)).append(")");
+            }
         }
-        if (extraMeat) {
-            desc.append(" + extra meat");
-        }
-        if (extraCheese) {
-            desc.append(" + extra cheese");
-        }
+
         return desc.toString();
+    }
+
+    // Add getter methods for extra pricing
+    public double getExtraMeatPrice() {
+        switch (size) {
+            case 4: return 0.50;
+            case 8: return 1.00;
+            case 12: return 1.50;
+            default: return 1.00;
+        }
+    }
+
+    public double getExtraCheesePrice() {
+        switch (size) {
+            case 4: return 0.30;
+            case 8: return 0.60;
+            case 12: return 0.90;
+            default: return 0.60;
+        }
     }
 
     @Override
