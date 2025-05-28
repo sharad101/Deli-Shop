@@ -6,8 +6,9 @@ public class RegularTopping extends Topping {
         super(name, sandwichSize);
     }
 
-//    @Override
-//    public double getPrice() {
-//        return 0.00; // Regular toppings are free
-//    }
+    @Override
+    public double getPrice() {
+        return 0;
+    }
+    
 }

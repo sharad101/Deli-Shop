@@ -25,5 +25,6 @@ public abstract class Topping {
         this.sandwichSize = sandwichSize;
     }
 
-
+    public abstract double getPrice();
 }
+
