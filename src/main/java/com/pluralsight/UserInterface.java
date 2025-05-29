@@ -12,9 +12,12 @@ public class UserInterface {
     }
 
     public void start() {
-        System.out.println("Welcome to DELI-cious!");
-        System.out.println("======================");
-
+        System.out.println("""
+    ╔══════════════════════════════════════╗
+    ║         WELCOME TO DELI-cious        ║
+    ║    Home of Handcrafted Sandwiches    ║
+    ╚══════════════════════════════════════╝
+    """);
         boolean running = true;
         while (running) {
             running = displayHomeScreen();
