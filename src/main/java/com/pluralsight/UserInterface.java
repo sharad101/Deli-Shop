@@ -41,7 +41,7 @@ public class UserInterface {
                     startNewOrder();
                     break;
                 case 0:
-                    return false; // Exit application
+                    return false;
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
@@ -49,7 +49,7 @@ public class UserInterface {
             System.out.println("Invalid input. Please enter a number.");
         }
 
-        return true; // Continue running
+        return true;
     }
 
     private void startNewOrder() {
@@ -101,7 +101,7 @@ public class UserInterface {
             System.out.println("Invalid input. Please enter a number.");
         }
 
-        return true; // Continue order screen
+        return true;
     }
 
     private void addSandwich() {
@@ -109,11 +109,11 @@ public class UserInterface {
 
         // Step 1: Select size
         int size = selectSandwichSize();
-        if (size == -1) return; // User cancelled
+        if (size == -1) return; // User cancelled Order
 
         // Step 2: Select bread
         String breadType = selectBreadType();
-        if (breadType == null) return; // User cancelled
+        if (breadType == null) return; // User cancelled Order
 
         // Create sandwich
         Sandwich sandwich = new Sandwich(size, breadType);
@@ -222,7 +222,7 @@ public class UserInterface {
             }
         }
 
-        // Ask about extra meat if any meat was added
+        // Stream
         if (sandwich.getToppings().stream().anyMatch(t -> t instanceof PremiumTopping &&
                 ((PremiumTopping) t).getCategory().equals("meat"))) {
             askAboutExtraMeat(sandwich);
@@ -257,7 +257,7 @@ public class UserInterface {
             }
         }
 
-        // Ask about extra cheese if any cheese was added
+        // Stream
         if (sandwich.getToppings().stream().anyMatch(t -> t instanceof PremiumTopping &&
                 ((PremiumTopping) t).getCategory().equals("cheese"))) {
             askAboutExtraCheese(sandwich);
@@ -531,7 +531,7 @@ public class UserInterface {
             switch (choice) {
                 case 1:
                     // Save receipt only after confirmation
-                    currentOrder.saveReceiptToFile();
+                    currentOrder.getOrderDetails();
                     System.out.println("Receipt saved. Thank you for your order!");
 
                     confirmOrder(); // This can clear/reset order if needed

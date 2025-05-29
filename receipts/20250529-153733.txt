@@ -1,0 +1,9 @@
+DELI-cious Receipt
+==================
+Order ID: 20250529-153501
+Order Date: 2025-05-29 15:35:01
+Items:
+- 8" Wrap sandwich (toasted) with: Meats(Ham, Steak) +EXTRA Cheese(Cheddar) +EXTRA Toppings(Peppers, Tomatoes, Thousand Islands sauce, Sauce) - $14.10
+Total: $14.10
+
+Thank you for your business!

@@ -1,9 +1,5 @@
 package com.pluralsight;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -63,18 +59,18 @@ public class Order {
         return orderDate;
     }
 
-    public void saveReceiptToFile() {
-        String filename = "receipt_" + orderId + ".txt";
-
-        // You can customize the folder where to save, here it uses current working directory
-        String filePath = Paths.get(System.getProperty("user.dir"), filename).toString();
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write(getOrderDetails());
-            System.out.println("Receipt saved successfully to " + filePath);
-        } catch (IOException e) {
-            System.err.println("Error saving receipt to file: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+//    public void saveReceiptToFile() {
+//        String filename = "receipt_" + orderId + ".txt";
+//
+//        // You can customize the folder where to save, here it uses current working directory
+//        String filePath = Paths.get(System.getProperty("user.dir"), filename).toString();
+//
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+//            writer.write(getOrderDetails());
+//            System.out.println("Receipt saved successfully to " + filePath);
+//        } catch (IOException e) {
+//            System.err.println("Error saving receipt to file: " + e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
 }
