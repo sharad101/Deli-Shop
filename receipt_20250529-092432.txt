@@ -1,0 +1,7 @@
+Order ID: 20250529-092432
+Order Date: 2025-05-29 09:24:32
+Items:
+- 12" Wrap sandwich with: Meats(Roast Beef, Steak) Cheese(Cheddar, American) Toppings(Guacamole, Mushrooms, Mustard sauce, Thousand Islands sauce) - $19.00
+- Small Iced Tea drink - $2.00
+- Flamin' Hot chips - $1.50
+Total: $22.50
