@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Sandwich implements OrderItem {
     private int size; // 4, 8, or 12 inches
@@ -91,21 +92,22 @@ public class Sandwich implements OrderItem {
         if (!toppings.isEmpty()) {
             desc.append(" with:");
 
-            List<String> meats = new ArrayList<>();
-            List<String> cheeses = new ArrayList<>();
-            List<String> regularToppings = new ArrayList<>();
+            // Group toppings using streams
+            var grouped = toppings.stream()
+                    .collect(Collectors.groupingBy(t -> {
+                        if (t instanceof PremiumTopping premium) {
+                            return premium.getCategory().toLowerCase(); // "meat" or "cheese"
+                        } else {
+                            return "regular";
+                        }
+                    }));
 
-            for (Topping topping : toppings) {
-                if (topping instanceof PremiumTopping premium) {
-                    if ("meat".equalsIgnoreCase(premium.getCategory())) {
-                        meats.add(topping.getName());
-                    } else if ("cheese".equalsIgnoreCase(premium.getCategory())) {
-                        cheeses.add(topping.getName());
-                    }
-                } else {
-                    regularToppings.add(topping.getName());
-                }
-            }
+            List<String> meats = grouped.getOrDefault("meat", List.of()).stream()
+                    .map(Topping::getName).toList();
+            List<String> cheeses = grouped.getOrDefault("cheese", List.of()).stream()
+                    .map(Topping::getName).toList();
+            List<String> regular = grouped.getOrDefault("regular", List.of()).stream()
+                    .map(Topping::getName).toList();
 
             if (!meats.isEmpty()) {
                 desc.append(" Meats(").append(String.join(", ", meats)).append(")");
@@ -117,8 +119,8 @@ public class Sandwich implements OrderItem {
                 if (extraCheese) desc.append(" +EXTRA");
             }
 
-            if (!regularToppings.isEmpty()) {
-                desc.append(" Toppings(").append(String.join(", ", regularToppings)).append(")");
+            if (!regular.isEmpty()) {
+                desc.append(" Toppings(").append(String.join(", ", regular)).append(")");
             }
         }
 
@@ -136,7 +138,7 @@ public class Sandwich implements OrderItem {
         };
     }
 
-    private double getExtraMeatPrice() {
+    double getExtraMeatPrice() {
         return switch (size) {
             case 4 -> 0.50;
             case 8 -> 1.00;
@@ -145,7 +147,7 @@ public class Sandwich implements OrderItem {
         };
     }
 
-    private double getExtraCheesePrice() {
+    double getExtraCheesePrice() {
         return switch (size) {
             case 4 -> 0.30;
             case 8 -> 0.60;
