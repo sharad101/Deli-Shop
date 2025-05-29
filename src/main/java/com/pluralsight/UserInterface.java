@@ -527,11 +527,18 @@ public class UserInterface {
 
             switch (choice) {
                 case 1:
-                    confirmOrder();
+                    // Save receipt only after confirmation
+                    currentOrder.saveReceiptToFile();
+                    System.out.println("Receipt saved. Thank you for your order!");
+
+                    confirmOrder(); // This can clear/reset order if needed
+                    currentOrder = null; // Clean up
                     break;
+
                 case 0:
-                    System.out.println("Returning to order screen...");
+                    System.out.println("Checkout cancelled. Returning to order screen...");
                     break;
+
                 default:
                     System.out.println("Invalid option. Returning to order screen...");
             }
@@ -539,6 +546,7 @@ public class UserInterface {
             System.out.println("Invalid input. Returning to order screen...");
         }
     }
+
 
     private void confirmOrder() {
         ReceiptManager receiptManager = new ReceiptManager();
