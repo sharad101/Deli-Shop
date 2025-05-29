@@ -1,0 +1,10 @@
+DELI-cious Receipt
+==================
+Order ID: 20250528-234207
+Order Date: 2025-05-28 23:42:07
+Items:
+- 4" Wheat sandwich (toasted) with: Meats(Salami, Ham) Cheese(Swiss) Toppings(Peppers, Lettuce, Ketchup sauce) - $8.25
+- Medium Lemonade drink - $2.50
+Total: $10.75
+
+Thank you for your business!

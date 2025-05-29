@@ -198,7 +198,7 @@ public class UserInterface {
         while (true) {
             System.out.println("\nAvailable meats:");
             for (int i = 0; i < meats.length; i++) {
-                double price = new PremiumToppings(meats[i], sandwich.getSize(), "meat").getPrice();
+                double price = new PremiumTopping(meats[i], sandwich.getSize(), "meat").getPrice();
                 System.out.println((i + 1) + ") " + meats[i] + " - $" + String.format("%.2f", price));
             }
             System.out.println("0) Done with meats");
@@ -208,7 +208,7 @@ public class UserInterface {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 if (choice == 0) break;
                 if (choice >= 1 && choice <= meats.length) {
-                    PremiumToppings meat = new PremiumToppings(meats[choice - 1], sandwich.getSize(), "meat");
+                    PremiumTopping meat = new PremiumTopping(meats[choice - 1], sandwich.getSize(), "meat");
                     sandwich.addTopping(meat);
                     System.out.println(meats[choice - 1] + " added!");
                 } else {
@@ -220,8 +220,8 @@ public class UserInterface {
         }
 
         // Ask about extra meat if any meat was added
-        if (sandwich.getToppings().stream().anyMatch(t -> t instanceof PremiumToppings &&
-                ((PremiumToppings) t).getCategory().equals("meat"))) {
+        if (sandwich.getToppings().stream().anyMatch(t -> t instanceof PremiumTopping &&
+                ((PremiumTopping) t).getCategory().equals("meat"))) {
             askAboutExtraMeat(sandwich);
         }
     }
@@ -233,7 +233,7 @@ public class UserInterface {
         while (true) {
             System.out.println("\nAvailable cheeses:");
             for (int i = 0; i < cheeses.length; i++) {
-                double price = new PremiumToppings(cheeses[i], sandwich.getSize(), "cheese").getPrice();
+                double price = new PremiumTopping(cheeses[i], sandwich.getSize(), "cheese").getPrice();
                 System.out.println((i + 1) + ") " + cheeses[i] + " - $" + String.format("%.2f", price));
             }
             System.out.println("0) Done with cheese");
@@ -243,7 +243,7 @@ public class UserInterface {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 if (choice == 0) break;
                 if (choice >= 1 && choice <= cheeses.length) {
-                    PremiumToppings cheese = new PremiumToppings(cheeses[choice - 1], sandwich.getSize(), "cheese");
+                    PremiumTopping cheese = new PremiumTopping(cheeses[choice - 1], sandwich.getSize(), "cheese");
                     sandwich.addTopping(cheese);
                     System.out.println(cheeses[choice - 1] + " added!");
                 } else {
@@ -255,8 +255,8 @@ public class UserInterface {
         }
 
         // Ask about extra cheese if any cheese was added
-        if (sandwich.getToppings().stream().anyMatch(t -> t instanceof PremiumToppings &&
-                ((PremiumToppings) t).getCategory().equals("cheese"))) {
+        if (sandwich.getToppings().stream().anyMatch(t -> t instanceof PremiumTopping &&
+                ((PremiumTopping) t).getCategory().equals("cheese"))) {
             askAboutExtraCheese(sandwich);
         }
     }
@@ -278,7 +278,7 @@ public class UserInterface {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 if (choice == 0) break;
                 if (choice >= 1 && choice <= regularToppings.length) {
-                    RegularToppings topping = new RegularToppings(regularToppings[choice - 1], sandwich.getSize());
+                    RegularTopping topping = new RegularTopping(regularToppings[choice - 1], sandwich.getSize());
                     sandwich.addTopping(topping);
                     System.out.println(regularToppings[choice - 1] + " added!");
                 } else {
@@ -306,7 +306,7 @@ public class UserInterface {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 if (choice == 0) break;
                 if (choice >= 1 && choice <= sauces.length) {
-                    RegularToppings sauce = new RegularToppings(sauces[choice - 1] + " sauce", sandwich.getSize());
+                    RegularTopping sauce = new RegularTopping(sauces[choice - 1] + " sauce", sandwich.getSize());
                     sandwich.addTopping(sauce);
                     System.out.println(sauces[choice - 1] + " added!");
                 } else {
@@ -334,7 +334,7 @@ public class UserInterface {
                 int choice = Integer.parseInt(scanner.nextLine().trim());
                 if (choice == 0) break;
                 if (choice >= 1 && choice <= sides.length) {
-                    RegularToppings side = new RegularToppings(sides[choice - 1], sandwich.getSize());
+                    RegularTopping side = new RegularTopping(sides[choice - 1], sandwich.getSize());
                     sandwich.addTopping(side);
                     System.out.println(sides[choice - 1] + " added!");
                 } else {
