@@ -6,8 +6,8 @@ package com.pluralsight;
  * which means it must define methods to get the price and description of the item.
  *
  * Fields:
- * - size: the size of the drink (e.g., Small, Medium, Large)
- * - flavor: the flavor of the drink (e.g., Cola, Lemonade)
+ * - size: the size of the drink
+ * - flavor: the flavor of the drink
  *
  * This class demonstrates polymorphism by implementing the OrderItem interface,
  * allowing it to be treated the same as other items like Sandwiches and Chips

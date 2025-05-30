@@ -5,7 +5,7 @@ package com.pluralsight;
  * The Chips class represents a chip item in the sandwich shop's menu.
  * It implements the OrderItem interface, which allows it to be included in a customer's order.
  *
- * - Each Chips object has a type (e.g., BBQ, Sour Cream).
+ * - Each Chips object has a type
  * - All chips have a fixed price of $1.50.
  * - The class provides methods to get and set the chip type,
  *   and to retrieve a description and price for display or receipt purposes.

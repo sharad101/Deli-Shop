@@ -1,6 +1,6 @@
 package com.pluralsight;
 
-/*
+/**
  * Abstract class Topping represents a generic sandwich topping.
  *
  * This class serves as a base (superclass) in an inheritance hierarchy where
@@ -36,14 +36,22 @@ public abstract class Topping {
     }
 
 
+    //Getter for the sandwich size
     public int getSandwichSize() {
         return sandwichSize;
     }
 
+    //Setter for the sandwich size
     public void setSandwichSize(int sandwichSize) {
         this.sandwichSize = sandwichSize;
     }
 
+    /**
+     * Abstract method to get the price of the topping.
+     * This method enforces that all subclasses must provide their own implementation,
+     * enabling polymorphism. When called on a subclass instance, the overridden method
+     * specific to that topping type will execute.
+     */
     public abstract double getPrice();
 }
 

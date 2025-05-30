@@ -58,19 +58,5 @@ public class Order {
     public LocalDateTime getOrderDate() {
         return orderDate;
     }
-
-//    public void saveReceiptToFile() {
-//        String filename = "receipt_" + orderId + ".txt";
-//
-//        // You can customize the folder where to save, here it uses current working directory
-//        String filePath = Paths.get(System.getProperty("user.dir"), filename).toString();
-//
-//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-//            writer.write(getOrderDetails());
-//            System.out.println("Receipt saved successfully to " + filePath);
-//        } catch (IOException e) {
-//            System.err.println("Error saving receipt to file: " + e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
+    
 }
