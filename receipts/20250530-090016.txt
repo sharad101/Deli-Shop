@@ -1,0 +1,9 @@
+DELI-cious Receipt
+==================
+Order ID: 20250530-085918
+Order Date: 2025-05-30 08:59:18
+Items:
+- 8" Wrap sandwich (toasted) with: Meats(Steak, Roast Beef) +EXTRA Cheese(Cheddar) Toppings(Tomatoes, Jalapeños, Cucumbers, Mayo sauce, Mustard sauce) - $13.50
+Total: $13.50
+
+Thank you for your business!
