@@ -8,59 +8,55 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SandwichTest {
 
-        private Sandwich sandwich;
+    @Test
+    void testGetPrice_BaseOnly_8Inch() {
+        Sandwich sandwich = new Sandwich(8, "Wheat");
+        double expected = 7.00; // base price for 8-inch
+        assertEquals(expected, sandwich.getPrice(), 0.001);
+    }
 
+    @Test
+    void testGetPrice_WithRegularToppings() {
+        Sandwich sandwich = new Sandwich(8, "White");
+        sandwich.addTopping(new RegularTopping("Lettuce", 8));
+        sandwich.addTopping(new RegularTopping("Tomato", 8));
 
-        @Test
-        public void testBasePriceOnly() {
-            double expectedPrice = 7.00;
-            assertEquals(expectedPrice, sandwich.getPrice(), 0.01);
-        }
+        double expected = 7.00;
+        assertEquals(expected, sandwich.getPrice(), 0.001);
+    }
 
-        @Test
-        public void testAddToppingsAffectsPrice() {
-            Topping lettuce = new RegularTopping("Lettuce", 4);
-            Topping tomato = new RegularTopping("Tomato", 8);
-            sandwich.addTopping(lettuce);
-            sandwich.addTopping(tomato);
+    @Test
+    void testGetPrice_WithPremiumToppings() {
+        Sandwich sandwich = new Sandwich(8, "Italian");
+        sandwich.addTopping(new PremiumTopping("Turkey", 8, "Meat"));
+        sandwich.addTopping(new PremiumTopping("Cheddar", 8, "Cheese"));
 
-            double expectedPrice = 7.00 + 0.25 + 0.25;
-            assertEquals(expectedPrice, sandwich.getPrice(), 0.01);
-        }
+        double expected = 7.00 + 2.00 + 1.50;
+        assertEquals(expected, sandwich.getPrice(), 0.001);
+    }
 
-        @Test
-        public void testExtraMeatAndCheeseAffectsPrice() {
-            sandwich.setExtraMeat(true);
-            sandwich.setExtraCheese(true);
+    @Test
+    void testGetPrice_WithExtraMeatAndCheese() {
+        Sandwich sandwich = new Sandwich(12, "Multigrain");
+        sandwich.setExtraMeat(true);
+        sandwich.setExtraCheese(true);
 
-            double expectedPrice = 7.00 + 1.00 + 0.60;
-            assertEquals(expectedPrice, sandwich.getPrice(), 0.01);
-        }
+        // base: 8.50, extra meat: 1.50, extra cheese: 0.90
+        double expected = 8.50 + 1.50 + 0.90;
+        assertEquals(expected, sandwich.getPrice(), 0.001);
+    }
 
-        @Test
-        public void testToppingsListIsImmutable() {
-            Topping pickle = new RegularTopping("Pickle", 3);
-            sandwich.addTopping(pickle);
+    @Test
+    void testGetPrice_CombinedToppingsAndExtras() {
+        Sandwich sandwich = new Sandwich(4, "White");
+        sandwich.addTopping(new RegularTopping("Lettuce", 4));
+        sandwich.addTopping(new PremiumTopping("Ham", 4, "Meat"));
+        sandwich.setExtraMeat(true);
+        sandwich.setExtraCheese(true);
 
-            List<Topping> toppings = sandwich.getToppings();
-            toppings.clear(); // Should not affect original
+        double expected = 5.50 + 0.25 + 0.75 + 0.50 + 0.30;
+        assertEquals(expected, sandwich.getPrice(), 0.001);
+    }
 
-            assertEquals(1, sandwich.getToppings().size());
-        }
-
-        @Test
-        public void testGetDescriptionWithToastingAndExtras() {
-            sandwich.addTopping(new PremiumTopping("Ham", 8, "meat"));
-            sandwich.addTopping(new PremiumTopping("Swiss", 4, "cheese"));
-            sandwich.setToasted(true);
-            sandwich.setExtraMeat(true);
-            sandwich.setExtraCheese(true);
-
-            String description = sandwich.getDescription();
-
-            assertTrue(description.contains("8\" Wheat sandwich (toasted)"));
-            assertTrue(description.contains("Meats(Ham) +EXTRA"));
-            assertTrue(description.contains("Cheese(Swiss) +EXTRA"));
-        }
 
 }

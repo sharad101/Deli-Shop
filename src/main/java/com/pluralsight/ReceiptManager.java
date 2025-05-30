@@ -6,8 +6,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The ReceiptManager class is responsible for generating and saving receipts
+ * for customer orders. It provides functionality to create receipt content
+ * from an Order and write it to a timestamped text file.
+ */
+
 public class ReceiptManager {
 
+    //Generates a formatted receipt string from an Order object
     public String generateReceipt(Order order) {
         StringBuilder receipt = new StringBuilder();
         receipt.append("DELI-cious Receipt\n");
@@ -17,6 +24,10 @@ public class ReceiptManager {
         return receipt.toString();
     }
 
+
+
+    // Saves the given receipt string to a text file in the "receipts" directory,
+    // using a timestamp-based filename.
     public boolean saveReceiptToFile(String receipt) {
         try {
             // Create receipts directory if it doesn't exist
@@ -38,6 +49,7 @@ public class ReceiptManager {
         }
     }
 
+    //Generates a unique filename using the current date and time
     private String generateFileName() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         return java.time.LocalDateTime.now().format(formatter) + ".txt";

@@ -2,15 +2,24 @@ package com.pluralsight;
 
 import java.util.Scanner;
 
+/**
+ * Handles all console-based user interaction for the DELI-cious POS system.
+ * Allows the user to start a new order, customize sandwiches, add drinks/chips,
+ * and checkout or cancel orders.
+ */
+
 public class UserInterface {
     private Scanner scanner;
     private Order currentOrder;
 
+    // Constructor
+    //Initializes the UserInterface with a Scanner for input and sets the current order to null
     public UserInterface() {
         this.scanner = new Scanner(System.in);
         this.currentOrder = null;
     }
 
+    // Print banner
     public void start() {
         System.out.println("""
     ╔══════════════════════════════════════╗
@@ -52,6 +61,7 @@ public class UserInterface {
         return true;
     }
 
+    //Initializes a new order and enters the order screen loop for customizing the order
     private void startNewOrder() {
         currentOrder = new Order();
         System.out.println("\n--- NEW ORDER STARTED ---");
@@ -63,6 +73,7 @@ public class UserInterface {
         }
     }
 
+    //Displays the main order screen with options to add sandwich, drink, chips, checkout, or cancel
     private boolean displayOrderScreen() {
         System.out.println("\n--- ORDER SCREEN ---");
         System.out.println("Current Order Total: $" + String.format("%.2f", currentOrder.getTotalPrice()));
@@ -104,6 +115,11 @@ public class UserInterface {
         return true;
     }
 
+    /**
+     * Guides the user through the process of building a custom sandwich by:
+     * selecting size, bread, meats, cheeses, toppings, sauces, and extras like toasting.
+     * Adds the completed sandwich to the current order.
+     */
     private void addSandwich() {
         System.out.println("\n--- ADD SANDWICH ---");
 
@@ -196,10 +212,13 @@ public class UserInterface {
 
     private void addMeatsToSandwich(Sandwich sandwich) {
         System.out.println("\nSelect meats (Enter 0 when done):");
+
+        //Array
         String[] meats = {"Steak", "Ham", "Salami", "Roast Beef", "Chicken", "Bacon"};
 
         while (true) {
             System.out.println("\nAvailable meats:");
+            //Display available meats and their prices
             for (int i = 0; i < meats.length; i++) {
                 double price = new PremiumTopping(meats[i], sandwich.getSize(), "meat").getPrice();
                 System.out.println((i + 1) + ") " + meats[i] + " - $" + String.format("%.2f", price));
@@ -223,18 +242,26 @@ public class UserInterface {
         }
 
         // Stream
-        if (sandwich.getToppings().stream().anyMatch(t -> t instanceof PremiumTopping &&
-                ((PremiumTopping) t).getCategory().equals("meat"))) {
+        /**
+         * sandwich.getToppings() returns a list of all toppings added to the sandwich.
+         * .stream() turns that list into a stream to allow functional-style operations.
+         * .anyMatch(...) checks if any element in the stream matches the provided condition (in our case is a PremiumTopping of category "meat").
+         */
+        if (sandwich.getToppings().stream().anyMatch(topping -> topping instanceof PremiumTopping &&
+                ((PremiumTopping) topping).getCategory().equals("meat"))) {
+            //Ask user for extra meat option
             askAboutExtraMeat(sandwich);
         }
     }
 
     private void addCheeseToSandwich(Sandwich sandwich) {
         System.out.println("\nSelect cheese (Enter 0 when done):");
+        //Array
         String[] cheeses = {"American", "Provolone", "Cheddar", "Swiss"};
 
         while (true) {
             System.out.println("\nAvailable cheeses:");
+            //Display available meats and their prices
             for (int i = 0; i < cheeses.length; i++) {
                 double price = new PremiumTopping(cheeses[i], sandwich.getSize(), "cheese").getPrice();
                 System.out.println((i + 1) + ") " + cheeses[i] + " - $" + String.format("%.2f", price));
@@ -258,6 +285,11 @@ public class UserInterface {
         }
 
         // Stream
+        /**
+         * sandwich.getToppings() returns a list of all toppings added to the sandwich.
+         * .stream() turns that list into a stream to allow functional-style operations.
+         * .anyMatch(...) checks if any element in the stream matches the provided condition (in our case is a PremiumTopping of category "meat").
+         */
         if (sandwich.getToppings().stream().anyMatch(t -> t instanceof PremiumTopping &&
                 ((PremiumTopping) t).getCategory().equals("cheese"))) {
             askAboutExtraCheese(sandwich);
@@ -266,11 +298,13 @@ public class UserInterface {
 
     private void addRegularToppingsToSandwich(Sandwich sandwich) {
         System.out.println("\nSelect regular toppings (FREE - Enter 0 when done):");
+        //Array
         String[] regularToppings = {"Lettuce", "Peppers", "Onions", "Tomatoes", "Jalapeños",
                 "Cucumbers", "Pickles", "Guacamole", "Mushrooms"};
 
         while (true) {
             System.out.println("\nAvailable regular toppings:");
+            //Display available regular toppings
             for (int i = 0; i < regularToppings.length; i++) {
                 System.out.println((i + 1) + ") " + regularToppings[i] + " - FREE");
             }
@@ -299,6 +333,7 @@ public class UserInterface {
 
         while (true) {
             System.out.println("\nAvailable sauces:");
+            //Display available sauces and their prices
             for (int i = 0; i < sauces.length; i++) {
                 System.out.println((i + 1) + ") " + sauces[i] + " - FREE");
             }
@@ -327,6 +362,7 @@ public class UserInterface {
 
         while (true) {
             System.out.println("\nAvailable sides:");
+            //Display available sides and their prices
             for (int i = 0; i < sides.length; i++) {
                 System.out.println((i + 1) + ") " + sides[i] + " - FREE");
             }
@@ -349,6 +385,7 @@ public class UserInterface {
         }
     }
 
+    // Prompts the user to decide whether to add extra meat to the sandwich.
     private void askAboutExtraMeat(Sandwich sandwich) {
         double extraCost = sandwich.getExtraMeatPrice();
         System.out.println("\nWould you like extra meat? (+$" + String.format("%.2f", extraCost) + ")");
@@ -367,6 +404,7 @@ public class UserInterface {
         }
     }
 
+    // Prompts the user to decide whether to add extra cheese to the sandwich.
     private void askAboutExtraCheese(Sandwich sandwich) {
         double extraCost = sandwich.getExtraCheesePrice();
         System.out.println("\nWould you like extra cheese? (+$" + String.format("%.2f", extraCost) + ")");
@@ -385,6 +423,7 @@ public class UserInterface {
         }
     }
 
+    // Prompts the user to decide whether to toast the sandwich.
     private void askAboutToasting(Sandwich sandwich) {
         System.out.println("\nWould you like your sandwich toasted?");
         System.out.println("1) Yes");
@@ -402,6 +441,7 @@ public class UserInterface {
         }
     }
 
+    // Guides the user through the drink selection process, including size and flavor
     private void addDrink() {
         System.out.println("\n--- ADD DRINK ---");
 
@@ -420,6 +460,7 @@ public class UserInterface {
         System.out.println("Drink total: $" + String.format("%.2f", drink.getPrice()));
     }
 
+    // Displays drink size options and returns the selected size
     private String selectDrinkSize() {
         System.out.println("\nSelect drink size:");
         System.out.println("1) Small - $2.00");
@@ -445,6 +486,7 @@ public class UserInterface {
         }
     }
 
+    // Displays available drink flavors and returns the selected flavor
     private String selectDrinkFlavor() {
         System.out.println("\nSelect drink flavor:");
         String[] flavors = {"Coke", "Pepsi", "Sprite", "Orange", "Lemonade", "Iced Tea", "Water"};
@@ -470,6 +512,7 @@ public class UserInterface {
         }
     }
 
+    // Guides the user through selecting types of chips
     private void addChips() {
         System.out.println("\n--- ADD CHIPS ---");
 
@@ -483,6 +526,7 @@ public class UserInterface {
         System.out.println("Chips total: $" + String.format("%.2f", chips.getPrice()));
     }
 
+    // Displays chip options and returns the selected type
     private String selectChipType() {
         System.out.println("\nSelect chip type (All chips - $1.50):");
         String[] chipTypes = {"Regular", "BBQ", "Sour Cream & Onion", "Salt & Vinegar",
@@ -509,6 +553,7 @@ public class UserInterface {
         }
     }
 
+    // Final step in the ordering process. Displays order summary and asks for confirmation
     private void checkout() {
         System.out.println("\n--- CHECKOUT ---");
         System.out.println("Order Details:");
@@ -551,6 +596,7 @@ public class UserInterface {
     }
 
 
+    // Generates and saves the receipt for the current order
     private void confirmOrder() {
         ReceiptManager receiptManager = new ReceiptManager();
         String receipt = receiptManager.generateReceipt(currentOrder);
@@ -566,6 +612,7 @@ public class UserInterface {
         currentOrder = null; // Clear the current order
     }
 
+    // Cancels the current order and resets the state.
     private void cancelOrder() {
         System.out.println("Order cancelled. Returning to home screen...");
         currentOrder = null; // Clear the current order
