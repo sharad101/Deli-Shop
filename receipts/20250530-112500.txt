@@ -1,0 +1,11 @@
+DELI-cious Receipt
+==================
+Order ID: 20250530-112340
+Order Date: 2025-05-30 11:23:40
+Items:
+- 8" Wrap sandwich (toasted) with: Meats(Ham, Salami) Cheese(American) Toppings(Lettuce, Peppers, Ketchup sauce) - $12.50
+- Small Sprite drink - $2.00
+- Sour Cream & Onion chips - $1.50
+Total: $16.00
+
+Thank you for your business!

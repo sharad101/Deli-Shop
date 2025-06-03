@@ -2,8 +2,6 @@ package com.pluralsight;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class SandwichTest {
@@ -57,6 +55,5 @@ class SandwichTest {
         double expected = 5.50 + 0.25 + 0.75 + 0.50 + 0.30;
         assertEquals(expected, sandwich.getPrice(), 0.001);
     }
-
 
 }
